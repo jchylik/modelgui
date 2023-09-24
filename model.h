@@ -77,6 +77,9 @@ private:
   double rhow;      // density of water [kg m-3]
   double S0;        // solar constant [W m-2]
   double pi;
+  
+  // additional numerical constants
+  double epsdth;    // minimum allowed jump to consider entrainment
 
   // Aditions for A-Gs scheme
   double mco2;      // molecular weight CO2 [g mol -1]
