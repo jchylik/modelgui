@@ -45,9 +45,6 @@ model::model(modelinput *extinput)
   rhow       =  1000.;                  // density of water [kg m-3]
   S0         =  1368.;                  // solar constant [W m-2]
   pi         =  3.14159265359;          // Pi
-  
-  // additional numerical constants
-  epsdth     =  0.05 ;                  // minimum allowed jump to consider entrainment
 
   // Aditions for A-Gs scheme
   mco2       =  44.;                    // molecular weight CO2 [g mol -1]
@@ -583,8 +580,8 @@ void model::runmlmodel()
   }
 
   // compute tendencies
-  if((beta == 0 && inputdthetav == 0)||(dtheta<epsdth))
-  { // encroachment if in setup or of temperature jumps becomes too small
+  if(beta == 0 && inputdthetav == 0)
+  {
     we    = 1 / gammatheta * wthetav / h;
     wf    = 1 / gammatheta * (dFz / (rho * cp)) / h;
   }
@@ -804,7 +801,7 @@ void model::intmlmodel()
   h        = h0      + dt * htend;
 
   theta    = theta0  + dt * thetatend;
-  dtheta   = max(0.0,dtheta0 + dt * dthetatend); // prevent negative jump
+  dtheta   = dtheta0 + dt * dthetatend;
   q        = q0      + dt * qtend;
   dq       = dq0     + dt * dqtend;
   sca      = sca0    + dt * scatend;
