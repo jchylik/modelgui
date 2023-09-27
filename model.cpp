@@ -521,7 +521,7 @@ void model::runcumodel()
 {
   // Virtual temperature units
   thetav           = theta  + 0.61 * theta * q;
-  wthetav          = wtheta + 0.61 * theta * wq;
+  wthetav          = wtheta + 0.61 * theta * wq+ 0.61*wtheta*q;
 
   // Mixed-layer top properties
   double Ptop    = Ps / exp((g * h)/(Rd * theta));
@@ -556,7 +556,7 @@ void model::runmlmodel()
   // compute mixed-layer tendencies
   // first compute necessary virtual temperature units
   thetav   = theta  + 0.61 * theta * q;
-  wthetav  = wtheta + 0.61 * theta * wq+ + 0.61*wtheta*q;
+  wthetav  = wtheta + 0.61 * theta * wq+ 0.61*wtheta*q;
   dthetav  = (theta + dtheta) * (1. + 0.61 * (q + dq)) - theta * (1. + 0.61 * q);
 
   if(wthetav > 0.)
@@ -849,7 +849,7 @@ void model::runslmodel()
 
   thetavsurf = thetasurf * (1. + 0.61 * qsurf);
   thetav     = theta * (1. + 0.61 * q);
-  wthetav    = wtheta + 0.61 * theta * wq;
+  wthetav    = wtheta + 0.61 * theta * wq+ 0.61*wtheta*q;
 
   zsl  = 0.1 * h;
 
