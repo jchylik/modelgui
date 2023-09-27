@@ -557,7 +557,7 @@ void model::runmlmodel()
   // first compute necessary virtual temperature units
   thetav   = theta  + 0.61 * theta * q;
   wthetav  = wtheta + 0.61 * theta * wq+ 0.61*wtheta*q;
-  dthetav  = (theta + dtheta) * (1. + 0.61 * (q + dq)) - theta * (1. + 0.61 * q);
+  dthetav  = (theta + dtheta) * (1. + 0.61 * (q + dq)) - theta * (1. + 0.61 * q); //--> add <q' theta'> approximation
 
   if(wthetav > 0.)
     wstar  = pow((g * h * wthetav) / thetav,(1./3.));
